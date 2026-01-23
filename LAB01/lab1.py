@@ -78,3 +78,32 @@ def sum_to_goal(arr, n):
         
             
 
+class UpCounter:
+    def __init__(self, stepSize = 1):
+        self.counter = 0
+        self.stepSize = stepSize
+    
+    def count(self):
+        return self.counter
+    def update(self):
+        self.counter = self.counter + self.stepSize
+
+
+class DownCounter(UpCounter):
+    def __init__(self, stepSize=1):
+        super().__init__(stepSize)
+        
+    def update(self):
+        self.counter = self.counter - self.stepSize
+
+
+    
+
+
+# Part B
+# 1 - What I like the most about Python is the fewer lines of code required to accomplish a result when compared with other programming languages, it seems simplier
+# 2 - Yes, the indentation and the fact we don't need braces to delimited code blocks. Since I'm not used to that I felt a bit strange
+# 3 - Well in terms of difference, the fact that Python is not a low level code programming language type as C++ allow us to forget about memory leak as it happens in C++. Having the machine to take care of how much 
+# memory I will need to write a new variable without specifing the type of data the variable will receive make our life easier, and also I believe that makes the code less error prone.
+# In term of similiarities most of the control flow statements (fi, for loops, while loop) work quite similar. Also for classes the destructor in C++ and the def __init__ in Python have the same functionality
+# it's like a blueprint of the class and what it needs to be isntantiated.
