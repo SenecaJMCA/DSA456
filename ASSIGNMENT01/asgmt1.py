@@ -1,4 +1,8 @@
 import random
+import time
+import matplotlib.pyplot as plt
+
+# STEPS 1 & 2
 
 def bubble_sort(my_list):
     steps=0 #Counting interation OR steps
@@ -76,13 +80,13 @@ def quick_sort(my_list, low=0, high=None):
             my_list[high]=tem
             steps = steps+3
             piv_index = i + 1
-            
+
             steps = steps + quick_sort(my_list, low, piv_index - 1)
             steps = steps + quick_sort(my_list, piv_index + 1, high)
 
     return steps
 
-def insertion_sor_range(my_list, left, right):
+def insertion_sort_range(my_list, left, right):
     steps=0
     for i in range(left+1, right+1):
         key = my_list[i]
@@ -98,5 +102,38 @@ def insertion_sor_range(my_list, left, right):
     return steps
 
 
-test_list = [random.randint(0,1000) for m in range(100)]
+# VERIFICATION
 
+test_list = [random.randint(0,1000) for m in range(100)]
+print("Bubble sort: ", bubble_sort(test_list.copy()))
+print("Selection sort: ", selection_sort(test_list.copy()))
+print("Insertion sort: ", insertion_sort(test_list.copy()))
+print("Quick sort: ", quick_sort(test_list.copy()))
+print("Insertion range: ", insertion_sort_range(test_list.copy(),0,99))
+
+
+
+# STEP 3
+
+sizes=[10,50,100,500,1000,2000]
+
+bubble_steps, selection_steps, insertion_steps, quick_steps = []
+
+for n in sizes:
+    worst_case = list (range(n,0,-1))
+
+    bubble_steps.append(bubble_sort(worst_case.copy()))
+    selection_steps.append(selection_sort(worst_case.copy()))
+    insertion_steps.append(insertion_sort(worst_case.copy()))
+    quick_steps.append(quick_sort(worst_case.copy()))
+
+plt.figure()
+plt.plot(sizes, bubble_steps, label="Bubble sort")
+plt.plot(sizes, selection_steps, label="Selection sort")
+plt.plot(sizes, insertion_steps, label="Insertion sort")
+plt.plot(sizes, quick_steps, label="Quick sort")
+plt.xlabel("n")
+plt.ylabel("T(n)")
+plt.title("Worst-case T(n) vs n")
+plt.legend()
+plt.show()
