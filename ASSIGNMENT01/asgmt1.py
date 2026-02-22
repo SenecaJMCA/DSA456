@@ -1,6 +1,8 @@
 import random
 import time
 import matplotlib.pyplot as plt
+import sys
+sys.setrecursionlimit(10000)
 
 # STEPS 1 & 2
 
@@ -14,12 +16,8 @@ def bubble_sort(my_list):
                 my_list[j]=my_list[j+1]
                 my_list[j+1]=temp
                 steps = steps + 3 #Adding 3 steps because it took 3 operations to do the swap
-    print(my_list)
     return steps
 
-li=[7,3,8,10,5]
-
-# print(bubble_sort(li))
 
 def selection_sort(my_list):
     steps = 0
@@ -34,10 +32,8 @@ def selection_sort(my_list):
                 my_list[i]=my_list[min_index]
                 my_list[min_index]=temp
                 steps = steps + 3
-    print(my_list)
+    
     return steps
-
-print(selection_sort(li))
 
 
 def insertion_sort(my_list):
@@ -56,35 +52,33 @@ def insertion_sort(my_list):
     return steps
 
 
-def quick_sort(my_list, low=0, high=None):
-    if high is None:
-        high = len(my_list)-1
-
+def quick_sort(my_list):
     steps = 0
-    if low<high:
-        piv=my_list[high]
-        steps = steps + 1
+
+    def _quick_sort(arr, low, high):
+        nonlocal steps
+        if low < high:
+            p = partition(arr, low, high)
+            _quick_sort(arr, low, p - 1)
+            _quick_sort(arr, p + 1, high)
+
+    def partition(arr, low, high):
+        nonlocal steps
+        pivot = arr[high]
         i = low - 1
+        for j in range(low, high):
+            steps += 1
+            if arr[j] <= pivot:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+                steps += 3
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        steps += 3
+        return i + 1
 
-        for j in range(low,high):
-            steps = steps +1
-            if my_list[j]<=piv:
-                i = i + 1
-                temp = my_list[i]
-                my_list[i]=my_list[j]
-                my_list[j]=temp
-                step = step + 3
-
-            tem = my_list[i+1]
-            my_list[i+1]=my_list[high]
-            my_list[high]=tem
-            steps = steps+3
-            piv_index = i + 1
-
-            steps = steps + quick_sort(my_list, low, piv_index - 1)
-            steps = steps + quick_sort(my_list, piv_index + 1, high)
-
+    _quick_sort(my_list, 0, len(my_list) - 1)
     return steps
+
 
 def insertion_sort_range(my_list, left, right):
     steps=0
@@ -117,7 +111,10 @@ print("Insertion range: ", insertion_sort_range(test_list.copy(),0,99))
 
 sizes=[10,50,100,500,1000,2000]
 
-bubble_steps, selection_steps, insertion_steps, quick_steps = []
+bubble_steps=[]
+selection_steps=[]
+insertion_steps=[]
+quick_steps = []
 
 for n in sizes:
     worst_case = list (range(n,0,-1))
@@ -135,5 +132,39 @@ plt.plot(sizes, quick_steps, label="Quick sort")
 plt.xlabel("n")
 plt.ylabel("T(n)")
 plt.title("Worst-case T(n) vs n")
+plt.legend()
+plt.show()
+
+
+
+# STEP 4
+bubble_time= []
+selection_time= []
+insertion_time= []
+quick_time = []
+
+for n in sizes:
+    worst_case=list(range(n,0,-1))
+    start = time.time()
+    bubble_sort(worst_case.copy())
+    bubble_time.append(time.time() - start)
+    start = time.time()
+    selection_sort(worst_case.copy())
+    selection_time.append(time.time() - start)
+    start = time.time()
+    insertion_sort(worst_case.copy())
+    insertion_time.append(time.time() - start)
+    start = time.time()
+    quick_sort(worst_case.copy())
+    quick_time.append(time.time() - start)
+
+plt.figure()
+plt.plot(sizes, bubble_time, label="Bubble sort")
+plt.plot(sizes, selection_time, label="Selection sort")
+plt.plot(sizes, insertion_time, label="Insertion sort")
+plt.plot(sizes, quick_time, label="Quick sort")
+plt.xlabel("n")
+plt.ylabel("Time (seconds)")
+plt.title("Worst-case execution time vs n")
 plt.legend()
 plt.show()
