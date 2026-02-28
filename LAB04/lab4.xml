@@ -1,0 +1,73 @@
+<!-- 1.	What sorting algorithm was the speaker trying to improve?
+
+The speaker made his presentation about improving quick_sort() algorithm. He aims to increase the threashold without compromising performance.
+
+2.	At what partition size does VS perform a simpler sort algorithm instead of continuing to partition?
+
+On VS the threshold is 32 elements.
+
+3.	At what partition size does GNU perform a simpler sort algorithm instead of continuing to partition?
+
+On Gnu the threshold is 16 elements.
+
+4.	Regular insertion sort does a linear search backwards from end of array for correct spot to insert. According to the speaker, why does switching to a binary search not improve performance?
+
+Alhtought the work done by a binary search is less than a regular insertion sort, the performance it self for a binary insertion is lower (slower) than a regular insertion. 
+
+5.	Describe what is meant by branch prediction. (this may require further research)
+
+Is the technique to predict the outcome of a conditional operation. The technique is used for example in if-else statement on Computer Scicence. CPUs will use this technique to speed up their process, if their initial predicion is correct, or if taken the worng prediction their performance will be penalized. This technique is used to avoid iddle time while CPUs decode part of the written code and that is because CPU uses pipelines to eecute intrusctions in pararrel.
+
+6.	What is meant by the term informational entropy? (this may require further research)
+
+Information entropy is the measury of the average uncertanty that something can happens. The hier the outcome is predictible (less random) the less is the entropy, in other words, the less suprises an outcome could be, the less the infomational entropy is. This means that a code with high predictibility is less expensive for the hardware, where as a high entropy will required lots of interation and consequently a lower performance, costing more for the hardware.
+
+7.	Speaker suggests the following algorithm:
+o	make_heap()
+o	unguarded_insertion_sort()
+He suggests that by doing make_heap() first, you can do something called unguarded_insertion_sort(). Please explain what unguarded_insertion_sort() is and why it is faster than regular insertion sort. How does performing make_heap() allow you to do this?
+
+Since the make_heap() checks if it has reached the first element of the array, meaning it does a boundary check, the unguarded_insertion_sort() makes sure to remove the boundary check. This way the make_heap() will guarantee that the first element of the array is the smallest one. 
+
+8.	The speaker talks about incorporating your conditionals into your arithmetic. What does this mean? Provide an example from the video and explain how the conditional is avoided.
+It means that instead of using conditionals branches we could use arithmetic operations to avoid branch prediction. By saying that, the speaker suggested to use count += (a<b) instead of “if (a<b) {….}” which will speed up the CPU execution.
+
+9.	The speaker talks about a bug in gnu's implementation. Describe the circumstances of this bug.
+
+The bug makes the GNU standad library sort to switch to insertion sort because it might assume a sentinel ion the logic branch were in reallity there is no sentinel. The partition logic balance will be inacurate. The bug happens on edge cases. 
+
+10.	The speaker shows several graphs about what happens as the threshold increases using his new algorithm. The metric of comparison is increased, and the metric of moves is increased, but time drops... What metric does the author think is missing? Describe the missing metric he speaks about in the video. What is the metric measuring?
+
+It’s Branch misprediction and refers to how many times the CPU chose the wrong prediction regarding their pipelines execution.
+
+11.	What does the speaker mean by fast code is left-leaning?
+
+I means that we should write the most commun predicted (expected) path early (less indented code) in the loops, that way the code could return or break as soon as a the event happens. These events are the error handlers and unlike cases for example. On the other hand the code that is more indented are for events which are more frenquent. The code written this way is faster.
+
+12.	What does the speaker mean by not mixing hot and cold code?
+
+He means that code use for interation should no be mixed with code user for one time setup or error handling. Code inside loop are hot codes, with are called over and over again, by mixing cold code, like one time variable set ups might polluate the memory and consequently slow down the CPU performance.
+
+Part B: Reflection
+This part must be individually done.
+
+1.	What did you/your team find most challenging to understand in the video?
+
+The entropy concept. At the beginning my first impression was totally the oposite of what actually the concept 
+
+2.	What is the most surprising thing you learned that you did not know before?
+
+That regular insertion sort would actually perfomer better than binary sort
+
+3.	Has the video given you ideas on how you can write better/faster code? If yes, explain what you plan to change when writing code in the future. If not, explain why not.
+
+Yes, one of the things I noticed that I used to do without thinking is the left leaning code or the oposite of it. I must confess that some of might code has the left leaning code but withou me intentionally doing so, some itme I would write the code just as the way I felt it should be written. Also I might in the past mixed up a few hot and cold code, which now I see the error this can cause. 
+
+REFERENCES:
+https://en.algorithmica.org/hpc/
+https://www.educative.io/answers/what-is-branch-prediction
+https://www.khanacademy.org/computing/computer-science/informationtheory/moderninfotheory/v/information-entropy
+https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html
+
+
+-->
