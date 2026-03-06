@@ -89,3 +89,58 @@ class SinglyLinkedList:
             current = current.next
         print(" -> ".join(elements) if elements else "Empty List")
         
+
+
+# PART B
+# Analysing the above functions where T(n) and O (n) is the size of the linked list, where n is the size of the array
+    
+# 1.__init__:
+#     Constant operation, assigning self.head to None
+#     T(n) = c
+#     O(n) = O(1)
+
+# 2. is_empty 
+#     Constant operation, checking if self.head is None
+#     T(n) = c
+#     O(n) = O(1)
+
+# 3. prepend:
+#     Constant operation, creates a node and update couple of reference
+#     T(n) = c
+#     O(n) = O(1)
+
+# 4. append:
+#     Considering the worse case, it would iterate the entire list to find the las node
+#     T(n) = an + b
+#     O(n) = O(n)
+
+# 5. insert_after:
+#     Assuming we already know the target node the insertion time is a constant operation
+#     T(n) = c
+#     O(n) = O(1)
+
+# 6. delete:
+#     The worse case scenaruio would it be to have to delete the last node of the ranked list, therefore to iterate the entire list
+#     T(n) = an + b
+#     O(n) = O(n)
+
+
+# 7. search:
+#     The worse case scenario would be to either not found the target node or item is not in the list(not found). Again another iteration throught the entire list
+#     T(n) = an + b
+#     O(n) = O(n)
+
+# 8. size:
+#     Another interation of the entire list to count the number of nodes
+#     T(n) = an + b
+#     O(n) = O(n)
+
+# 9. to_list:
+#     Another entire interation to append items to a list
+#     T(n) = an + b
+#     O(n) = O(n)
+
+# 10. print:
+#     Another interation of the entire list to print all items
+#     T(n) = an + b
+#     O(n) = O(n)
